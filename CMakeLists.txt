@@ -14,7 +14,7 @@ IF (CMAKE_COMPILER_IS_GNUCXX )
    SET(CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG ")
 
   ADD_DEFINITIONS("-Wall -Werror -Wno-unused-variable
-                   -Wno-unused-but-set-variable -Wno-unknown-pragmas ")
+                   -Wno-unused-but-set-variable -Wno-unknown-pragmas -Wno-unused-local-typedefs")
 ENDIF()
 
 ################################################################################
