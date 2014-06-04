@@ -1,7 +1,7 @@
 SET(PROJECT_NAME Sophus)
 
 PROJECT(${PROJECT_NAME})
-CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
+CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
 
 SET (CMAKE_VERBOSE_MAKEFILE ON)
 
@@ -9,12 +9,14 @@ IF( NOT CMAKE_BUILD_TYPE )
    SET( CMAKE_BUILD_TYPE Release )
 ENDIF()
 
+cmake_policy(SET CMP0022 NEW)
+
 IF (CMAKE_COMPILER_IS_GNUCXX )
    SET(CMAKE_CXX_FLAGS_DEBUG  "-O0 -g")
    SET(CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG ")
 
-  ADD_DEFINITIONS("-Wall -Werror -Wno-unused-variable
-                   -Wno-unused-but-set-variable -Wno-unknown-pragmas -Wno-unused-local-typedefs")
+  ADD_DEFINITIONS("-Wall -Wno-unused-variable
+                   -Wno-unknown-pragmas ")
 ENDIF()
 
 ################################################################################
@@ -54,7 +56,7 @@ LINK_LIBRARIES (${PROJECT_NAME} ${LIBS})
 set( Sophus_LIBRARIES ${Sophus_LIBRARIES} ${LIBS} )
 
 INCLUDE_DIRECTORIES(${INCLUDE_DIRS})
-ADD_LIBRARY(${PROJECT_NAME} SHARED ${SOURCES})
+ADD_LIBRARY(${PROJECT_NAME} STATIC ${SOURCES})
 
 ADD_EXECUTABLE(test_so2 sophus/test_so2.cpp)
 ADD_EXECUTABLE(test_se2 sophus/test_se2.cpp)
